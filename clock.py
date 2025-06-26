@@ -17,7 +17,8 @@ device = max7219(serial,
                  cascaded=4,
                  rotate=0,
                  block_orientation = -90,
-                 blocks_arranged_in_reverse_order=False)
+                 blocks_arranged_in_reverse_order=False,
+                 contrast=5)
 
 while 1:
     time1 = datetime.datetime.now()
