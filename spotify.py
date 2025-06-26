@@ -29,11 +29,12 @@ sp = spotipy.Spotify(auth_manager=SpotifyOAuth(client_id = client_id1,
 #port settings max7219 display                                           
 serial = spi(port = 0, device =0, gpio=noop())
 device = max7219(       serial,
-                        cascaded=4,
+                        height = 16,
+                        width = 32,
                         block_orientation=-90,
                         rotate=0,           
                         blocks_arranged_in_reverse_order=False,
-                        contrast=5)
+                        contrast=20)
                                                
 def song_api_datacollected():
 
@@ -62,15 +63,14 @@ def max7219_screen_vomit(msg):
 
 def show_time():
     with canvas(device) as draw:
-        time1 = datetime.datetime.now()
-        time1 = time.strftime("%H:%M")
-        draw.text((3,-2), str(time1), fill="white")
+        draw.text((10,8), "(||)", fill="white")
 
 while 1:
     song_switch = 0
     current = song_api_datacollected()
 
     if current == None or current['status'] != True:
+
         show_time()
     else:
         max7219_screen_vomit(f"{current['song_name']} by {current['artist']}")
